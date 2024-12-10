@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-8fsq4yw4iq4q6vl69@*e@3z5*4upqtzetyi*p)3bl8^!=@oj18
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://learning-log-app-d317479e02bd.herokuapp.com/']
 
 
 # Application definition
@@ -45,10 +45,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+     #Add WhiteNoise to installed apps
+    'whitenoise.runserver_nostatic',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    # other middleware entries...
+    'whitenoise.middleware.WhiteNoiseMiddleware', 
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -56,6 +61,15 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# Static files configuration
+STATIC_URL = '/static/'
+
+# This is where static files will be collected on Heroku
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# Optional: Enables the use of a file served by WhiteNoise for caching
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ROOT_URLCONF = 'll_project.urls'
 
@@ -135,3 +149,5 @@ LOGIN_REDIRECT_URL = 'learning_logs:topics'
 LOGOUT_REDIRECT_URL = 'learning_logs:index'
 LOGIN_URL = 'accounts:login'
 
+import django_heroku
+django_heroku.settings(locals())
