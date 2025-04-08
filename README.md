@@ -1,4 +1,5 @@
 # Learning Log
+🚀 Beginner Project | 🛠️ Built with Django | 🔐 Auth Enabled
 
 **Learning Log** is a web application that allows users to log their learning experiences, track progress, and organize their educational journey.
 
